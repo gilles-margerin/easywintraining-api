@@ -1,12 +1,18 @@
 const fastify = require('fastify')({ logger: true })
 
+fastify.get('/', async (req, res) => {
+  res.send('hello world')
+})
+
 fastify.post('/api/addevent', async (req, res) => {
-  return { req: req.body }
+  const payload = await req.body
+  console.log(payload)
+  res.send('post received')
 })
 
 const start = async () => {
   try {
-    await fastify.listen(3000)
+    await fastify.listen(process.env.PORT || 3000)
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)

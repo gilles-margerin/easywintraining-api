@@ -1,5 +1,7 @@
 const fastify = require('fastify')({ logger: true })
 
+fastify.register(require('fastify-formbody'))
+
 fastify.get('/', async (req, res) => {
   res.send('hello world')
 })

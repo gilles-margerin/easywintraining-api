@@ -13,6 +13,16 @@ fastify.get('/', async (req, res) => {
   res.send('hello world')
 })
 
+fastify.get('/api/delevent/:event', async (req, res) => {
+  try {
+    await Event.findOneAndDelete({_id: req.params.event})
+    res.redirect('https://easywintraining-website.vercel.app/calendar')
+  } catch (err) {
+    console.log('Error', err)
+    res.status(500).send('Server error trying to delete document')
+  }
+})
+
 fastify.post('/api/addevent', async (req, res) => {
   const reqDate = dateConversion(new Date(req.body.eventDate))
 

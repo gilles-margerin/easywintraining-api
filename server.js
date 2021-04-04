@@ -27,7 +27,7 @@ fastify.post('/api/addevent', async (req, res) => {
       color: setColor(req.body.eventType)
     }).save()
 
-    res.redirect('https://easywintraining-website.vercel.app/')
+    res.redirect('https://easywintraining-website.vercel.app/calendar')
   } catch (err) {
     console.log(err)
     res.status(500).send('Internal server error')

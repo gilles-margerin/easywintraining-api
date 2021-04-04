@@ -1,10 +1,13 @@
 const fastify = require('fastify')({ logger: true })
-const { dateConversion, dbConnect, setColor } = require('./utils')
+const dateConversion = require('./utils/dateConversion')
+const dbConnect = require('./utils/dbConnect')
+const setColor = require('./utils/setColor')
 const Event = require('./models/Event')
+require('dotenv').config()
 
 fastify.register(require('fastify-formbody'))
 
-await dbConnect()
+dbConnect()
 
 fastify.get('/', async (req, res) => {
   res.send('hello world')

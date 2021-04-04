@@ -2,6 +2,8 @@
 const mongoose = require('mongoose')
 
 const dbConnect = async () => {
+  console.log(process.env.TEST)
+  console.log(process.env.MONGO_URI)
   if (mongoose.connection.readyState >= 1) {
     return
   }

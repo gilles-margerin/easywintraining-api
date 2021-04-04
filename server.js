@@ -1,15 +1,34 @@
 const fastify = require('fastify')({ logger: true })
+const { dateConversion, dbConnect, setColor } = require('./utils')
+const Event = require('./models/Event')
 
 fastify.register(require('fastify-formbody'))
+
+await dbConnect()
 
 fastify.get('/', async (req, res) => {
   res.send('hello world')
 })
 
 fastify.post('/api/addevent', async (req, res) => {
-  const payload = await req.body
-  console.log(payload)
-  res.send('post received')
+  const reqDate = dateConversion(new Date(req.body.eventDate))
+
+  try {
+    await new Event({
+      name: req.body.eventName,
+      date: reqDate,
+      time: req.body.eventTime,
+      place: req.body.eventPlace,
+      description: req.body.eventDescription,
+      type: req.body.eventType,
+      color: setColor(req.body.eventType)
+    }).save()
+
+    res.redirect('https://vercel.com/gilles-margerin/easywintraining-website/calendar')
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Internal server error')
+  }
 })
 
 const start = async () => {

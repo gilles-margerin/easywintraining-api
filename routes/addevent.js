@@ -18,6 +18,7 @@ module.exports = function (fastify, options, done) {
           type: req.body.eventType,
           color: setColor(req.body.eventType),
         }).save();
+        res.redirect("https://easywintraining-website.vercel.app/calendar");
       } catch (err) {
         console.log("Error", err);
         res.status(500).send("Internal server error");

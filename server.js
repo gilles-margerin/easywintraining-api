@@ -3,6 +3,7 @@ const { URI, options } = require("./utils/dbConnect");
 const Event = require('./models/Event')
 
 fastify.register(require("fastify-formbody"));
+fastify.register(require('fastify-cors')({}))
 
 //db connection and config
 fastify.register(

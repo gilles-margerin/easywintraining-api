@@ -5,7 +5,7 @@ const Event = require('./models/Event')
 fastify.register(require("fastify-formbody"));
 fastify.register(require('fastify-cors'), {
   origin: '*',
-  methods: ['GET','POST','DELETE']
+  methods: 'GET,POST,DELETE,OPTIONS'
 })
 
 //db connection and config

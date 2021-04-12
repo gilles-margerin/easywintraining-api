@@ -1,30 +1,34 @@
-const fastify = require('fastify')({ logger: true })
-const dateConversion = require('./utils/dateConversion')
-const dbConnect = require('./utils/dbConnect')
-const setColor = require('./utils/setColor')
+const fastify = require("fastify")({ logger: true });
+const { URI, options } = require("./utils/dbConnect");
+const dateConversion = require("./utils/dateConversion");
+const setColor = require("./utils/setColor");
 const Event = require('./models/Event')
-require('dotenv').config()
 
-fastify.register(require('fastify-formbody'))
+fastify.register(require("fastify-formbody"));
 
-dbConnect()
-
-fastify.get('/', async (req, res) => {
-  res.send('hello world')
-})
-
-fastify.get('/api/delevent/:event', async (req, res) => {
-  try {
-    await Event.findOneAndDelete({_id: req.params.event})
-    res.redirect('https://easywintraining-website.vercel.app/calendar')
-  } catch (err) {
-    console.log('Error', err)
-    res.status(500).send('Server error trying to delete document')
+//db connection and config
+fastify.register(
+  require("fastify-mongoose-driver").plugin,
+  {
+    uri: URI,
+    settings: options,
+    models: [
+      Event,
+    ],
+  },
+  (err) => {
+    if (err) throw err;
   }
-})
+);
 
-fastify.post('/api/addevent', async (req, res) => {
-  const reqDate = dateConversion(new Date(req.body.eventDate))
+//routes
+fastify.register(require('./routes/eventlist'))
+fastify.register(require('./routes/delevent'))
+
+
+/* 
+fastify.post("/api/addevent", async (req, res) => {
+  const reqDate = dateConversion(new Date(req.body.eventDate));
 
   try {
     await new Event({
@@ -34,23 +38,23 @@ fastify.post('/api/addevent', async (req, res) => {
       place: req.body.eventPlace,
       description: req.body.eventDescription,
       type: req.body.eventType,
-      color: setColor(req.body.eventType)
-    }).save()
+      color: setColor(req.body.eventType),
+    }).save();
 
-    res.redirect('https://easywintraining-website.vercel.app/calendar')
+    res.redirect("https://easywintraining-website.vercel.app/calendar");
   } catch (err) {
-    console.log(err)
-    res.status(500).send('Internal server error')
+    console.log(err);
+    res.status(500).send("Internal server error");
   }
-})
+}); */
 
 const start = async () => {
   try {
-    await fastify.listen(process.env.PORT || 3000, '0.0.0.0')
+    await fastify.listen(process.env.PORT || 3000, "0.0.0.0");
   } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
+    fastify.log.error(err);
+    process.exit(1);
   }
-}
+};
 
-start()
+start();

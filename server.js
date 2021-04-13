@@ -1,6 +1,7 @@
 const fastify = require("fastify")({ logger: true });
 const { URI, options } = require("./utils/dbConnect");
 const Event = require('./models/Event')
+const User = require('./models/User')
 
 fastify.register(require("fastify-formbody"));
 fastify.register(require('fastify-cors'), {
@@ -15,7 +16,7 @@ fastify.register(
     uri: URI,
     settings: options,
     models: [
-      Event,
+      Event, User
     ],
   },
   (err) => {

@@ -6,12 +6,10 @@ module.exports = function (fastify, options, done) {
     method: "POST",
     url: "/api/events",
     handler: async (req, res) => {
-      const reqDate = dateConversion(new Date(req.body.eventDate));
-
       try {
         await new fastify.mongoose.Event({
           name: req.body.eventName,
-          date: reqDate,
+          date: req.body.eventDate,
           time: req.body.eventTime,
           place: req.body.eventPlace,
           description: req.body.eventDescription,

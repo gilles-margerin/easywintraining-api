@@ -5,7 +5,7 @@ module.exports = function (fastify, options, done) {
     handler: async (req, res) => {
       try {
         await fastify.mongoose.Event.findOneAndDelete({ _id: req.params.event });
-        res.redirect("https://easywintraining-website.vercel.app/calendar");
+        res.code(204)
       } catch (err) {
         console.log("Error", err);
         res.status(500).send("Server error trying to delete document");

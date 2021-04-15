@@ -18,7 +18,10 @@ module.exports = function (fastify, options, done) {
           type: req.body.eventType,
           color: setColor(req.body.eventType),
         }).save();
-        res.code(201)
+        res.code(201).send({
+          eventCreated: req.body.eventName
+        })
+        done()
       } catch (err) {
         console.log("Error", err);
         res.status(500).send("Internal server error");

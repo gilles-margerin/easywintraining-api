@@ -25,9 +25,9 @@ fastify.register(
 );
 
 //routes
-fastify.register(require('./routes/eventlist'))
 fastify.register(require('./routes/delevent'))
 fastify.register(require('./routes/addevent'))
+fastify.register(require('./routes/eventlist'))
 
 const start = async () => {
   try {

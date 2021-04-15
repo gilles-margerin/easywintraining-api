@@ -1,7 +1,7 @@
 module.exports = function (fastify, options, done) {
   fastify.route({
     method: 'DELETE',
-    url: '/api/delevent/:event',
+    url: '/api/events/:event',
     handler: async (req, res) => {
       try {
         await fastify.mongoose.Event.findOneAndDelete({ _id: req.params.event });

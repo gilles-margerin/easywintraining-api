@@ -1,7 +1,7 @@
 module.exports = function (fastify, options, done) {
   fastify.route({
     method: 'GET',
-    url:'/api/eventlist',
+    url:'/api/events',
     schema: {
       response: {
         200: {

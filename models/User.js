@@ -8,6 +8,9 @@ module.exports = {
     email: {
       type: String
     },
+    providerId: {
+      type: String
+    },
     isAdmin: {
       type: Boolean
     }

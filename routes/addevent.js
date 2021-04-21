@@ -1,14 +1,9 @@
-const dateConversion = require("../utils/dateConversion");
 const setColor = require("../utils/setColor");
 
 module.exports = function (fastify, options, done) {
   fastify.route({
     method: "POST",
     url: "/api/events",
-    preValidation: async(req, res, done) => {
-      console.log(req.body.userId)
-      done()
-    },
     handler: async (req, res) => {
       try {
         await new fastify.mongoose.Event({

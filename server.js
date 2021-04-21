@@ -25,6 +25,7 @@ fastify.register(
 );
 
 //routes
+fastify.register(require('./routes/adduser'))
 fastify.register(require('./routes/delevent'))
 fastify.register(require('./routes/addevent'))
 fastify.register(require('./routes/eventlist'))

@@ -4,13 +4,13 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: "POST",
     url: "/api/events",
-    preValidation: async (req, res, done) => {
+    preValidation: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.userId)
         if (!user.isAdmin) {
-        res.status(403).send('Unauthorized')
+          res.status(403).send('Unauthorized')
         } else {
-        done()  
+          console.log('Authorized')  
         }
       } catch (err) {
         console.log('Error getting user', err)

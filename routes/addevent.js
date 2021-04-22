@@ -7,7 +7,7 @@ module.exports = function (fastify, options, done) {
     handler: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.userId)
-        if (!user.isAdmin) {
+        if (user === null || user.isAdmin === false) {
           res.status(403).send('Unauthorized')
         } else {
           await new fastify.mongoose.Event({

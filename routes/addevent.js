@@ -4,6 +4,14 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: "POST",
     url: "/api/events",
+    preValidation: async (req, res, done) => {
+      const user = await fastify.mongoose.User.find({ _id: req.body.userId})
+      if (!user.isAdmin) {
+        res.status(403).send('Unauthorized')
+      } else {
+        done()
+      }
+    },
     handler: async (req, res) => {
       try {
         await new fastify.mongoose.Event({

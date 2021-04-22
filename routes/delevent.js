@@ -4,8 +4,13 @@ module.exports = function (fastify, options, done) {
     url: '/api/events/:event',
     handler: async (req, res) => {
       try {
-        await fastify.mongoose.Event.findOneAndDelete({ _id: req.params.event });
-        res.code(204)
+        const user = await fastify.mongoose.User.findById(req.body.userId)
+        if (!user.isAdmin) {
+          res.status(403).send('Unauthorized')
+        } else {
+          await fastify.mongoose.Event.findOneAndDelete({ _id: req.params.event });
+          res.code(204)
+        }
       } catch (err) {
         console.log("Error", err);
         res.status(500).send("Server error trying to delete document");

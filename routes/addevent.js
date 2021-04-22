@@ -4,30 +4,23 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: "POST",
     url: "/api/events",
-    preValidation: async (req, res) => {
+    handler: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.userId)
         if (!user.isAdmin) {
           res.status(403).send('Unauthorized')
         } else {
-          console.log('Authorized')  
+          await new fastify.mongoose.Event({
+            name: req.body.eventName,
+            date: req.body.eventDate,
+            time: req.body.eventTime,
+            place: req.body.eventPlace,
+            description: req.body.eventDescription,
+            type: req.body.eventType,
+            color: setColor(req.body.eventType),
+          }).save();
+          res.code(204)
         }
-      } catch (err) {
-        console.log('Error getting user', err)
-      }
-    },
-    handler: async (req, res) => {
-      try {
-        await new fastify.mongoose.Event({
-          name: req.body.eventName,
-          date: req.body.eventDate,
-          time: req.body.eventTime,
-          place: req.body.eventPlace,
-          description: req.body.eventDescription,
-          type: req.body.eventType,
-          color: setColor(req.body.eventType),
-        }).save();
-        res.code(204)
       } catch (err) {
         console.log("Error", err);
         res.status(500).send("Internal server error");

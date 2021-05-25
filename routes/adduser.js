@@ -8,7 +8,7 @@ module.exports = function (fastify, options, done) {
           name: req.body.name,
           email: req.body.email,
           providerId: req.body.providerId,
-          isAdmin: req.body.isAdmin
+          isAdmin: false
         }).save();
         res.code(204)
       } catch (err) {

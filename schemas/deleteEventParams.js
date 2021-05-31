@@ -1,7 +1,7 @@
 module.exports = {
   type: 'object',
-  required: ['id'],
+  required: ['event'],
   properties: {
-    id: { type: 'string' }
+    event: { type: 'string' }
   }
 }

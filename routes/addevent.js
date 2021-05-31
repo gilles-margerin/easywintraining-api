@@ -1,5 +1,4 @@
 const setColor = require("../utils/setColor");
-const addEventBody = require('../schemas/addEventBody')
 
 module.exports = function (fastify, options, done) {
   fastify.route({

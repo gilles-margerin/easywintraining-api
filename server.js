@@ -2,6 +2,9 @@ const fastify = require("fastify")({ logger: true });
 const { URI, options } = require("./utils/dbConnect");
 const Event = require('./models/Event')
 const User = require('./models/User')
+const addEventBody = require('./schemas/addEventBody')
+const addUserBody = require('./schemas/addUserBody')
+const deleteEventParams = require('./schemas/deleteEventParams')
 
 fastify.register(require("fastify-formbody"));
 fastify.register(require('fastify-cors'), {
@@ -25,9 +28,10 @@ fastify.register(
 );
 
 //routes
-fastify.register(require('./routes/adduser'))
-fastify.register(require('./routes/delevent'))
-fastify.register(require('./routes/addevent'))
+fastify.register(require('./routes/schema'))
+fastify.register(require('./routes/adduser'), { schema: addUserBody })
+fastify.register(require('./routes/delevent'), { schema: deleteEventParams })
+fastify.register(require('./routes/addevent'), { schema: addEventBody })
 fastify.register(require('./routes/eventlist'))
 
 const start = async () => {

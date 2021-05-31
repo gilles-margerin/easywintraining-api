@@ -1,9 +1,13 @@
 const setColor = require("../utils/setColor");
+const addEventBody = require('../schemas/addEventBody')
 
 module.exports = function (fastify, options, done) {
   fastify.route({
     method: "POST",
     url: "/api/events",
+    schema: {
+      body: options.schema,
+    },
     handler: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.userId)

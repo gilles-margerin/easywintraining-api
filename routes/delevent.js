@@ -2,6 +2,9 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: 'DELETE',
     url: '/api/events/:event',
+    schema: {
+      params: options.schema
+    }, 
     handler: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.userId)

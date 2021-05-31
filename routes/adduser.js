@@ -2,6 +2,9 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: 'POST',
     url: '/api/users',
+    schema: {
+      body: options.schema
+    },
     handler: async (req, res) => {
       try {
         await new fastify.mongoose.User({

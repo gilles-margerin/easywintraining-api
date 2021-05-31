@@ -7,7 +7,6 @@ module.exports = {
     'eventPlace',
     'eventDescription',
     'eventType',
-    'eventColor'
   ],
   properties: {
     eventName: { type: 'string' },
@@ -16,6 +15,5 @@ module.exports = {
     eventPlace: { type: 'string' },
     eventDescription: { type: 'string' },
     eventType: { type: 'string' },
-    eventColor: { type: 'string' },
   }
 }

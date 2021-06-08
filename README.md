@@ -13,6 +13,3 @@ __Purpose__
 - Provide a schema based, modular REST API to handle database management of gaming events and users
 - Experiment Fastify framework and put backend training into practice
 
-
-## Todo
-- [ ] Add a route and handler for PUT requests

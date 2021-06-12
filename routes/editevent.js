@@ -9,7 +9,7 @@ module.exports = function (fastify, options, done) {
           res.status(403).send('Unauthorized')
         } else {
           console.log(req.body.update)
-          res.code(204).send(req.body.update)
+          res.send(req.body.update)
         }
       } catch (err) {
         console.log("Error", err)

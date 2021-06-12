@@ -31,6 +31,7 @@ fastify.register(
 fastify.register(require('./routes/adduser'), { schema: addUserBody })
 fastify.register(require('./routes/delevent'), { schema: deleteEventParams })
 fastify.register(require('./routes/addevent'), { schema: addEventBody })
+fastify.register(require('./routes/editevent'))
 
 const start = async () => {
   try {

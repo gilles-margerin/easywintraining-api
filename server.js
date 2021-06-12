@@ -9,7 +9,7 @@ const deleteEventParams = require('./schemas/deleteEventParams')
 fastify.register(require("fastify-formbody"));
 fastify.register(require('fastify-cors'), {
   origin: '*',
-  methods: 'GET,POST,DELETE,OPTIONS'
+  methods: 'GET,POST,PUT,DELETE,OPTIONS'
 })
 
 //db connection and config

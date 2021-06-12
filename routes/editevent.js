@@ -2,7 +2,7 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: "PUT",
     url: "/api/events/:event",
-    handler: async (res, res) => {
+    handler: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.userId)
         if (user === null || user.isAdmin === false) {

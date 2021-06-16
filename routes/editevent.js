@@ -2,6 +2,10 @@ module.exports = function (fastify, options, done) {
   fastify.route({
     method: "PUT",
     url: "/api/events/:event",
+    schema: {
+      params: options.schema.params,
+      body: options.schema.body
+    },
     handler: async (req, res) => {
       try {
         const user = await fastify.mongoose.User.findById(req.body.user)

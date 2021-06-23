@@ -1,19 +1,19 @@
 module.exports = {
   type: 'object',
   required: [
-    'eventName',
-    'eventDate',
-    'eventTime',
-    'eventPlace',
-    'eventDescription',
-    'eventType',
+    'name',
+    'date',
+    'time',
+    'place',
+    'description',
+    'type',
   ],
   properties: {
-    eventName: { type: 'string' },
-    eventDate: { type: 'string' },
-    eventTime: { type: 'string' },
-    eventPlace: { type: 'string' },
-    eventDescription: { type: 'string' },
-    eventType: { type: 'string' },
+    name: { type: 'string' },
+    date: { type: 'string' },
+    time: { type: 'string' },
+    place: { type: 'string' },
+    description: { type: 'string' },
+    type: { type: 'string' },
   }
 }

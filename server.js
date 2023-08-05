@@ -5,11 +5,12 @@ const User = require('./models/User')
 const addEventBody = require('./schemas/addEventBody')
 const addUserBody = require('./schemas/addUserBody')
 const deleteEventParams = require('./schemas/deleteEventParams')
+const editEventSchema = require('./schemas/editEventSchema')
 
 fastify.register(require("fastify-formbody"));
 fastify.register(require('fastify-cors'), {
   origin: '*',
-  methods: 'GET,POST,DELETE,OPTIONS'
+  methods: 'GET,POST,PUT,DELETE,OPTIONS'
 })
 
 //db connection and config
@@ -31,6 +32,7 @@ fastify.register(
 fastify.register(require('./routes/adduser'), { schema: addUserBody })
 fastify.register(require('./routes/delevent'), { schema: deleteEventParams })
 fastify.register(require('./routes/addevent'), { schema: addEventBody })
+fastify.register(require('./routes/editevent'), { schema: editEventSchema })
 
 const start = async () => {
   try {
